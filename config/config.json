@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "clock-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/clock/ClockWebPart.js",
+          "manifest": "./src/webparts/clock/ClockWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ClockWebPartStrings": "lib/webparts/clock/loc/{locale}.js"
+  }
+}
