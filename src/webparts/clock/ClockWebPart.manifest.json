@@ -19,7 +19,7 @@
     "group": { "default": "Other" },
     "title": { "default": "World Clock" },
     "description": { "default": "World Clock" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "WorldClock",
     "properties": {
       "timeZoneOffset": 0
     }

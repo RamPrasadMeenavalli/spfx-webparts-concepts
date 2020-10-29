@@ -6,7 +6,6 @@ import {
 } from '@microsoft/sp-webpart-base';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField,
   PropertyPaneDropdown,
   IPropertyPaneDropdownOption } from "@microsoft/sp-property-pane";
 
@@ -18,7 +17,17 @@ import { IWorldTimeProps } from './components/IWorldTimeProps';
 import { IClockWebPartProps } from './IClockWebPartProps';
 import * as timeZones from './components/Timezones';
 
+import { setup as pnpSetup } from "@pnp/common";
+
 export default class ClockWebPart extends BaseClientSideWebPart<IClockWebPartProps> {
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      pnpSetup({
+        spfxContext: this.context
+      });
+    });
+  }
 
   public render(): void {
     const element: React.ReactElement<IWorldTimeProps> = React.createElement(
@@ -28,7 +37,9 @@ export default class ClockWebPart extends BaseClientSideWebPart<IClockWebPartPro
         timeZoneOffset: this.properties.timeZoneOffset,
         errorHandler: (errorMessage: string) => {
           this.context.statusRenderer.renderError(this.domElement, errorMessage);
-        }
+        },
+        webpartId: this.context.instanceId,
+        loginName: this.context.pageContext.user.loginName
       }
     );
     ReactDom.render(element, this.domElement);

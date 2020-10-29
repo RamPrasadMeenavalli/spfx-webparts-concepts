@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styles from './Clock.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { IWorldTimeProps } from './IWorldTimeProps';
 
 export interface IClockProps {
     // defines the timeZone offset in minutes from UTC
@@ -100,5 +101,11 @@ export class Clock extends React.Component<IClockProps, IClockState> {
                 <div className={styles.digital}>{escape(this.state.date.toLocaleTimeString())}</div>
             </div>
         );
+    }
+
+    public componentDidUpdate(prevProps:IClockProps){
+        if(this.props.timeZoneOffset != prevProps.timeZoneOffset){
+            this.render();
+        }
     }
   }
